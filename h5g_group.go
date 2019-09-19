@@ -171,3 +171,18 @@ func (g *CommonFG) LinkExists(name string) bool {
 	defer C.free(unsafe.Pointer(c_name))
 	return C.H5Lexists(g.id, c_name, 0) > 0
 }
+
+// CreateTureImage create a image set with given name under a CommonFG
+func (g *CommonFG) CreateTrueImage(name string, img image.Image) error {
+	if g.LinkExists(name) {
+		return errors.New("name already exist")
+	}
+	return newImage(g.id, name, img)
+}
+
+func (g *CommonFG) ReadTrueImage(name string) (image.Image, error) {
+	if !g.LinkExists(name) {
+		return nil, errors.New("name doesn't exist")
+	}
+	return getImage(g.id, name)
+}
