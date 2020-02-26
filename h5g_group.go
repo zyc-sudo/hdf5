@@ -175,14 +175,14 @@ func (g *CommonFG) LinkExists(name string) bool {
 // CreateTureImage create a image set with given name under a CommonFG
 func (g *CommonFG) CreateTrueImage(name string, img image.Image) error {
 	if g.LinkExists(name) {
-		return errors.New("name already exist")
+		return errors.New("image name already exist")
 	}
 	return newImage(g.id, name, img)
 }
 
 func (g *CommonFG) ReadTrueImage(name string) (image.Image, error) {
 	if !g.LinkExists(name) {
-		return nil, errors.New("name doesn't exist")
+		return nil, errors.New("image name doesn't exist")
 	}
 	return getImage(g.id, name)
 }
