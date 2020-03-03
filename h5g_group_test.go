@@ -53,6 +53,9 @@ func TestGroup(t *testing.T) {
 	if g2.Name() != "/foo/bar" {
 		t.Errorf("wrong Name for group: want %q, got %q", "/foo/bar", g1.Name())
 	}
+	if !g1.LinkExists("bar") {
+		t.Error(`expected "bar" child link for "/foo" group not present`)
+	}
 
 	if !g1.LinkExists("bar") {
 		t.Error(`expected "bar" child link for "/foo" group not present`)
