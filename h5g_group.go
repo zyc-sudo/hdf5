@@ -56,6 +56,11 @@ func (g *CommonFG) CreateDatasetWith(name string, dtype *Datatype, dspace *Datas
 	return createDataset(g.id, name, dtype, dspace, dcpl)
 }
 
+// AttributeExist check if an attribute of the given name exist at this location or not.
+func (g *Group) AttributeExist(name string) bool {
+	return attributeExists(g.id, name)
+}
+
 // CreateAttribute creates a new attribute at this location. The returned
 // attribute must be closed by the user when it is no longer needed.
 func (g *Group) CreateAttribute(name string, dtype *Datatype, dspace *Dataspace) (*Attribute, error) {

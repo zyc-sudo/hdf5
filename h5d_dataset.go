@@ -154,6 +154,11 @@ func (s *Dataset) Write(data interface{}) error {
 	return s.WriteSubset(data, nil, nil)
 }
 
+// AttributeExist check if an attribute of the given name exist at this location or not.
+func (s *Dataset) AttributeExist(name string) bool {
+	return attributeExists(s.id, name)
+}
+
 // Creates a new attribute at this location. The returned attribute
 // must be closed by the user when it is no longer needed.
 func (s *Dataset) CreateAttribute(name string, dtype *Datatype, dspace *Dataspace) (*Attribute, error) {

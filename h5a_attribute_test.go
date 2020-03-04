@@ -62,10 +62,13 @@ func TestWriteAttribute(t *testing.T) {
 			}
 			defer attr.Close()
 
+			if !dset.AttributeExist(name) {
+				t.Fatalf("Attribute create failed for %s", name)
+			}
+
 			if err := attr.Write(v.Value, dtype); err != nil {
 				t.Fatalf("Attribute write failed: %v", err)
 			}
-
 			got := reflect.New(v.Type).Elem()
 			if err := attr.Read(got.Addr().Interface(), dtype); err != nil {
 				t.Fatalf("Attribute read failed: %v", err)

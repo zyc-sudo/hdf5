@@ -33,6 +33,12 @@ func createAttribute(id C.hid_t, name string, dtype *Datatype, dspace *Dataspace
 	return newAttribute(hid), nil
 }
 
+func attributeExists(id C.hid_t, name string) bool {
+	c_name := C.CString(name)
+	defer C.free(unsafe.Pointer(c_name))
+	return C.H5Aexists(id, c_name) > 0
+}
+
 func openAttribute(id C.hid_t, name string) (*Attribute, error) {
 	c_name := C.CString(name)
 	defer C.free(unsafe.Pointer(c_name))
