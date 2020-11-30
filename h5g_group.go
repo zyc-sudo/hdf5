@@ -56,6 +56,12 @@ func (g *CommonFG) CreateDatasetWith(name string, dtype *Datatype, dspace *Datas
 	return createDataset(g.id, name, dtype, dspace, dcpl)
 }
 
+// CreateSoftLink create a link under current node to targetPath
+// One should use the LinkExist to test if the targetPath exist or not
+func (g *CommonFG) CreateSoftLink(targetPath string, LinkName string) error {
+	return lCreateSoft(targetPath, g.id, LinkName)
+}
+
 // AttributeExist check if an attribute of the given name exist at this location or not.
 func (g *Group) AttributeExist(name string) bool {
 	return attributeExists(g.id, name)
